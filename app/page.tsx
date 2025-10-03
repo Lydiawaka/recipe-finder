@@ -1,8 +1,9 @@
-import { Footer } from "@/components/footer";
-import { Navigation } from "@/components/navigation";
-import { RecipeGrid } from "@/components/recipe-grid";
-import { SearchForm } from "@/components/search-form";
-import { HeartIcon } from "lucide-react";
+import { Footer } from "@/components/footer"
+import { Navigation } from "@/components/navigation"
+import { RecipeGrid } from "@/components/recipe-grid"
+import { SearchForm } from "@/components/search-form"
+import { HeartIcon } from "lucide-react"
+import { Suspense } from "react"
 
 export default function Home() {
   return (
@@ -23,18 +24,20 @@ export default function Home() {
           </p>
         </header>
 
-        <SearchForm />
+        {/* Wrap SearchForm in Suspense */}
+        <Suspense fallback={<div>Loading search...</div>}>
+          <SearchForm />
+        </Suspense>
 
         <div className="mt-12">
-          <RecipeGrid />
+          {/* Wrap RecipeGrid in Suspense */}
+          <Suspense fallback={<div>Loading recipes...</div>}>
+            <RecipeGrid />
+          </Suspense>
         </div>
       </div>
 
-      <div>
-        <Footer />
-      </div>
-
-      <footer />
+      <Footer />
     </main>
-  );
+  )
 }
